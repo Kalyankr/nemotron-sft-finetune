@@ -1,0 +1,41 @@
+[project]
+name = "nemotron"
+version = "0.1.0"
+description = "Fine-tuning pipeline for the NVIDIA Nemotron Model Reasoning Challenge"
+readme = "README.md"
+requires-python = ">=3.10"
+dependencies = [
+    "torch>=2.4",
+    "transformers>=4.45",
+    "peft>=0.13",
+    "trl>=0.12",
+    "datasets>=3.0",
+    "accelerate>=1.0",
+    "bitsandbytes>=0.44",
+    "sentencepiece>=0.2",
+    "protobuf>=5.0",
+    "pandas>=2.0",
+    "numpy>=1.26",
+    "matplotlib>=3.8",
+    "seaborn>=0.13",
+    "pyyaml>=6.0",
+]
+
+[project.optional-dependencies]
+dev = ["pytest", "ruff", "mypy"]
+blackwell = ["mamba-ssm"]
+tracking = ["wandb>=0.17", "mlflow>=2.14"]
+
+[build-system]
+requires = ["hatchling"]
+build-backend = "hatchling.build"
+
+[tool.hatch.build.targets.wheel]
+packages = ["src/nemotron"]
+
+[tool.ruff]
+line-length = 120
+target-version = "py310"
+
+[tool.ruff.lint]
+select = ["E", "F", "I", "W"]
