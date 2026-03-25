@@ -1,0 +1,38 @@
+# GRPO (Group Relative Policy Optimization) training config
+# Run: python scripts/train_grpo.py --config configs/grpo.yaml
+
+# Experiment tracking
+tracker: mlflow
+experiment_name: nemotron-grpo
+run_name: null  # auto-generated if null
+tags:
+  model: nemotron-3-nano-30b
+  method: grpo
+  stage: rl
+
+# wandb settings (only used when tracker=wandb)
+wandb:
+  project: nemotron-reasoning
+  entity: null
+
+# mlflow settings (only used when tracker=mlflow)
+mlflow:
+  tracking_uri: ./mlruns
+
+training:
+  num_train_epochs: 1
+  per_device_train_batch_size: 1
+  gradient_accumulation_steps: 4
+  learning_rate: 5.0e-6
+  lr_scheduler_type: cosine
+  warmup_ratio: 0.1
+  weight_decay: 0.01
+  bf16: true
+  gradient_checkpointing: true
+  seed: 42
+
+  # GRPO-specific
+  num_generations: 4        # candidates sampled per prompt
+  max_prompt_length: 512    # max tokenized prompt length
+  max_completion_length: 4096  # max tokens for each completion
+  temperature: 0.7          # sampling temperature for generation

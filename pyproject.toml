@@ -25,6 +25,7 @@ dependencies = [
 dev = ["pytest", "ruff", "mypy"]
 blackwell = ["mamba-ssm"]
 tracking = ["wandb>=0.17", "mlflow>=2.14"]
+teacher = ["google-generativeai>=0.8", "openai>=1.30"]
 
 [build-system]
 requires = ["hatchling"]
